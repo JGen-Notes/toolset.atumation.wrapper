@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: eu.jgen.notes.automation.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: eu.jgen.notes.automation.test.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit,
+ eu.jgen.notes.automation;bundle-version="1.0.0",
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+
