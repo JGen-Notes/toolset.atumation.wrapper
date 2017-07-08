@@ -51,6 +51,7 @@ class JGenModelTest {
 		ency.connect()
 		assertTrue(ency.countModels() == 1)
 		genModel = ency.findModels().get(0) 
+	//	println(genModel.localName)
 	}
 
 	@AfterClass def static void tearDownAfterClass() {
@@ -64,10 +65,16 @@ class JGenModelTest {
 
 	@After def void tearDown() {
 	}
+	
+		@Test def void testLocalName() {
+		var  name = genModel.getLocalName()
+		assertTrue(name  == "emptytst.ief")
+	}
 
 	@Test def void testCountObjects() {
 		var int counter = genModel.countObjects()
-		assertTrue(counter == 1030)
+		//println(counter)
+		assertTrue(counter == 1038)
 	}
 
 	@Test def void testCountNamedObjects() {
@@ -88,7 +95,8 @@ class JGenModelTest {
 
 	@Test def void testFindAllObjects() {
 		var array = genModel.findAllObjects()
-		assertTrue(array.length == 1030)
+		// println(array.length )
+		assertTrue(array.length == 1038)
 	}
 
 	@Test def void testFindNamedObject() {

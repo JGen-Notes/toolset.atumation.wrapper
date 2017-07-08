@@ -57,29 +57,20 @@ public class JGenObjectTest {
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
     JGenFactory factory = JGenFactory.eINSTANCE;
-    JGenEncyclopedia _createEncyclopedia = factory.createEncyclopedia();
-    JGenObjectTest.ency = _createEncyclopedia;
+    JGenObjectTest.ency = factory.createEncyclopedia();
     JGenObjectTest.ency.connect();
     int _countModels = JGenObjectTest.ency.countModels();
     boolean _equals = (_countModels == 1);
     Assert.assertTrue(_equals);
-    JGenModel[] _findModels = JGenObjectTest.ency.findModels();
-    JGenModel _get = _findModels[0];
-    JGenObjectTest.genModel = _get;
-    int _objType = JGenObjectTest.getObjType(ObjTypeCode.BUSSYS);
-    JGenObject[] _findTypeObjects = JGenObjectTest.genModel.findTypeObjects(_objType);
+    JGenObjectTest.genModel = JGenObjectTest.ency.findModels()[0];
     final Function1<JGenObject, Boolean> _function = (JGenObject it) -> {
       return Boolean.valueOf(true);
     };
-    JGenObject _findFirst = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(_findTypeObjects)), _function);
-    JGenObjectTest.bussys = _findFirst;
-    int _objType_1 = JGenObjectTest.getObjType(ObjTypeCode.PCROOT);
-    JGenObject[] _findTypeObjects_1 = JGenObjectTest.genModel.findTypeObjects(_objType_1);
+    JGenObjectTest.bussys = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(JGenObjectTest.genModel.findTypeObjects(JGenObjectTest.getObjType(ObjTypeCode.BUSSYS)))), _function);
     final Function1<JGenObject, Boolean> _function_1 = (JGenObject it) -> {
       return Boolean.valueOf(true);
     };
-    JGenObject _findFirst_1 = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(_findTypeObjects_1)), _function_1);
-    JGenObjectTest.pcroot = _findFirst_1;
+    JGenObjectTest.pcroot = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(JGenObjectTest.genModel.findTypeObjects(JGenObjectTest.getObjType(ObjTypeCode.PCROOT)))), _function_1);
   }
   
   @AfterClass
@@ -119,50 +110,37 @@ public class JGenObjectTest {
   
   @Test
   public void testCountAssociationMany() {
-    int _ascType = JGenObjectTest.getAscType(AscTypeCode.HASBUSYS);
-    final int count = JGenObjectTest.pcroot.countAssociationMany(_ascType);
+    final int count = JGenObjectTest.pcroot.countAssociationMany(JGenObjectTest.getAscType(AscTypeCode.HASBUSYS));
     Assert.assertTrue((count == 1));
   }
   
   @Test
   public void testFindAssociationMany() {
-    int _ascType = JGenObjectTest.getAscType(AscTypeCode.HASBUSYS);
-    final JGenObject[] array = JGenObjectTest.pcroot.findAssociationMany(_ascType);
+    final JGenObject[] array = JGenObjectTest.pcroot.findAssociationMany(JGenObjectTest.getAscType(AscTypeCode.HASBUSYS));
     int _size = ((List<JGenObject>)Conversions.doWrapArray(array)).size();
     boolean _equals = (_size == 1);
     Assert.assertTrue(_equals);
     final Function1<JGenObject, Boolean> _function = (JGenObject it) -> {
       return Boolean.valueOf(true);
     };
-    JGenObject _findFirst = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(array)), _function);
-    int _id = _findFirst.getId();
+    int _id = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(array)), _function).getId();
     int _id_1 = JGenObjectTest.bussys.getId();
     boolean _equals_1 = (_id == _id_1);
     Assert.assertTrue(_equals_1);
-    final Function1<JGenObject, Boolean> _function_1 = (JGenObject it) -> {
-      return Boolean.valueOf(true);
-    };
-    JGenObject _findFirst_1 = IterableExtensions.<JGenObject>findFirst(((Iterable<JGenObject>)Conversions.doWrapArray(array)), _function_1);
-    boolean _equals_2 = Objects.equal(_findFirst_1, JGenObjectTest.bussys);
-    Assert.assertTrue(_equals_2);
   }
   
   @Test
   public void testFindAssociationOne() {
-    int _ascType = JGenObjectTest.getAscType(AscTypeCode.FOUNDBY);
-    final JGenObject object = JGenObjectTest.bussys.findAssociationOne(_ascType);
+    final JGenObject object = JGenObjectTest.bussys.findAssociationOne(JGenObjectTest.getAscType(AscTypeCode.FOUNDBY));
     int _id = object.getId();
     int _id_1 = JGenObjectTest.pcroot.getId();
     boolean _equals = (_id == _id_1);
     Assert.assertTrue(_equals);
-    boolean _equals_1 = Objects.equal(object, JGenObjectTest.pcroot);
-    Assert.assertTrue(_equals_1);
   }
   
   @Test
   public void testFindCharacterProperty() {
-    int _prpType = JGenObjectTest.getPrpType(PrpTypeCode.PLANING);
-    final char character = JGenObjectTest.bussys.findCharacterProperty(_prpType);
+    final char character = JGenObjectTest.bussys.findCharacterProperty(JGenObjectTest.getPrpType(PrpTypeCode.PLANING));
     char _charAt = "N".charAt(0);
     boolean _equals = (character == _charAt);
     Assert.assertTrue(_equals);
@@ -170,15 +148,13 @@ public class JGenObjectTest {
   
   @Test
   public void testFindNumericProperty() {
-    int _prpType = JGenObjectTest.getPrpType(PrpTypeCode.OPCODE);
-    final int number = JGenObjectTest.bussys.findNumericProperty(_prpType);
+    final int number = JGenObjectTest.bussys.findNumericProperty(JGenObjectTest.getPrpType(PrpTypeCode.OPCODE));
     Assert.assertTrue((number == 58));
   }
   
   @Test
   public void testFindTextProperty() {
-    int _prpType = JGenObjectTest.getPrpType(PrpTypeCode.NAME);
-    final String name = JGenObjectTest.bussys.findTextProperty(_prpType);
+    final String name = JGenObjectTest.bussys.findTextProperty(JGenObjectTest.getPrpType(PrpTypeCode.NAME));
     boolean _equals = Objects.equal(name, "EMPTYTST");
     Assert.assertTrue(_equals);
   }
@@ -193,8 +169,7 @@ public class JGenObjectTest {
   
   @Test
   public void testIsAssociationOneExists() {
-    int _ascType = JGenObjectTest.getAscType(AscTypeCode.FOUNDBY);
-    final boolean exist = JGenObjectTest.bussys.isAssociationOneExists(_ascType);
+    final boolean exist = JGenObjectTest.bussys.isAssociationOneExists(JGenObjectTest.getAscType(AscTypeCode.FOUNDBY));
     Assert.assertTrue(exist);
   }
   

@@ -181,6 +181,13 @@ public interface JGenModel {
 	public abstract String getName();
 
 	/**
+	 * Get local name of the model.
+	 * 
+	 * @return Returns the local name.
+	 */
+	public abstract String getLocalName();
+
+	/**
 	 * Gets the model path.
 	 * 
 	 * @return string with path to the model location

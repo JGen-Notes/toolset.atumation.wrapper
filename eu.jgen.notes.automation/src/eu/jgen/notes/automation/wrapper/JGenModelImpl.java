@@ -41,6 +41,16 @@ public class JGenModelImpl implements JGenModel {
 		this.ency = ency;
 		this.autoOpenAPI = ency.autoOpenAPI;
 	}
+	
+	public String getLocalName() {
+		int ids[] = ency.oleModel.getIDsOfNames(new String[] { "Name" });
+		Variant variant = ency.oleModel.getProperty(ids[0]);
+		if (ency.checkLastReturnCode() != 0) {
+			return "";
+		} else {
+			return variant.getString();
+		}
+	}
 
 	public JGenObject addObject(int objTypeCode) {
 		int ids[] = autoOpenAPI.getIDsOfNames(new String[] { "AddObject" });
